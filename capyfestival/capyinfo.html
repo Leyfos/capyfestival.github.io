@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Capy Festival > CapInfo</title>
+    <link rel="icon" type="image/x-icon" href="capyicon.png">
+    <style>
+        body {
+            background-image: url("capyicon.png");
+            background-size: 95px;
+            background-repeat: repeat;
+            background-color: #F8f0e8;
+            margin: 0;
+            padding: 0;
+            font-family: "HanfiyeGuesterya", "Arial", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .decor {
+            content: '';
+            background: rgb(255, 255, 255);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 72vw;
+            z-index: -1;
+        }
+
+        .decor.right {
+            left: 72vw;
+        }
+
+        .site-title {
+            font-family: "HanfiyeGuesterya";
+            font-size: 36px;
+            color: #3c5556;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: url('favicon.png'), pointer;
+        }
+
+        .about-us {
+            font-size: 18px;
+            color: #3c5556;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: url('favicon.png'), pointer;
+        }
+
+        .separator {
+            background-color: #3c5556;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            top: 60px;
+            z-index: 2;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            margin-top: 80px;
+        }
+
+        .image-article {
+            flex: 1;
+            margin-right: 20px;
+            margin-left: -20;
+            overflow: hidden;
+            position: relative;
+            width: 300px;
+        }
+
+        .oval-container {
+            border: 2px solid #3c5556;
+            border-radius: 50% 50%;
+            /* Adjust the border-radius for oval shape */
+            width: 300px;
+            /* Adjust the width to match the .image-article width */
+            height: 400px;
+            /* Adjust the height as needed */
+            position: relative;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+        }
+
+        article img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0;
+            object-fit: cover;
+        }
+
+        .card-container {
+            flex: 1;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: 2px solid #3c5556;
+            border-radius: 15px;
+            background-color: #f5d4c3;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .main-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .card div {
+            margin-bottom: 10px;
+        }
+
+        .card h1 {
+            font-size: 24px;
+            color: #3c5556;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: #3c5556;
+        }
+
+        .card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .card li {
+            font-size: 16px;
+            color: #3c5556;
+        }
+
+        .text-paragraph {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .text-paragraph h2,
+        .text-paragraph .paragraph-title,
+        .text-paragraph .paragraph-text {
+            margin-left: 20px;
+            color: #3c5556;
+        }
+
+        .text-paragraph .paragraph-text>div {
+            margin-left: 20px;
+            text-indent: -20px;
+        }
+
+        .text-paragraph .faq-item {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .text-paragraph .faq-item h3 {
+            color: #3c5556;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .text-paragraph .faq-item p {
+            color: #3c5556;
+            font-size: 18px;
+        }
+
+        nav {
+            margin-top: 20px;
+            /* Добавлен отступ между верхней панелью и навигацией */
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 5px;
+            /* Отступ между элементами списка */
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #3c5556;
+        }
+
+        nav a:hover {
+            font-weight: bold;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 3;
+        }
+
+        .modal-content {
+            background-color: #e9f1ef;
+            border-radius: 15px;
+            margin: 10% auto;
+            padding: 20px;
+            width: 70%;
+            max-width: 400px;
+            position: relative;
+            text-align: center;
+        }
+
+        .close {
+            color: #3c5556;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .modal-text {
+            font-size: 18px;
+            color: #3c5556;
+            text-align: center;
+        }
+
+        .top-bar {
+            background-color: #c8DBD7;
+            height: 62px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="decor"></div>
+    <div class="top-bar"></div>
+    <div class="site-title" onclick="goToHomePage()">Capy Festival</div>
+    <div class="about-us" onclick="openModal()">About Us</div>
+    <div class="separator"></div>
+
+    <main class="main-container">
+        <article class="image-article">
+            <div class="oval-container">
+                <img src="capyinfo1.jpg" alt="Capybara Image">
+            </div>
+        </article>
+
+        <div class="card-container">
+            <h1 style="font-family:'HanfiyeGuesterya'; text-align: center; color: #3c5556;">Capybara Basic Data</h1>
+            <div class="card">
+                <div>COMMON NAME: Capybara</div>
+                <div>SCIENTIFIC NAME: Hydrochoerus hydrochaeris</div>
+                <div>TYPE: Mammals</div>
+                <div>DIET: Herbivore</div>
+                <div>GROUP NAME: Herd</div>
+                <div>AVERAGE LIFE SPAN IN THE WILD: Up to 7 years</div>
+                <div>SIZE: 4.6 feet long: up to 2 feet high at shoulders</div>
+                <div>WEIGHT: 77 – 143 pounds</div>
+            </div>
+
+    </main>
+
+    <nav>
+        <ul>
+            <li><a href="#section1">Section 1: What Is A Capybara</a></li>
+            <li><a href="#section2">Section 2: Capybara Reproduction and Development</a></li>
+            <li><a href="#section3">Section 3: What Do Capybara Eat?</a></li>
+            <li><a href="#section4">Section 4: Are Capybaras Endangered? </a></li>
+            <li><a href="#section5">Section 5: Popularity and meme culture </a></li>
+            <li><a href="#section6">Section 6: CAPYBARA FAQ</a></li>
+        </ul>
+    </nav>
+
+    <section id="section1" class="text-paragraph">
+        <h2 class="paragraph-title" style="color: #e09789;"> What Is A Capybara</h2>
+        <p class="paragraph-text" style="font-size: 18px;">
+            Species members have a broad, deep muzzle; short ears and tail; small eyes set far back on the head;
+            and short limbs with partially webbed feet, the forefoot having four digits and the hind foot having three.
+            <br>
+            <br>
+            Because the capybara has a rather sparse coat, its skin is visible beneath the long, coarse hairs. The fur
+            is
+            reddish brown to grayish above and yellowish brown below. It is worth noted that unlike other rodents,
+            they have only one color. <br>
+            <br>
+            The capybara lives in densely vegetated areas around ponds, lakes, rivers, marshes, and swamps.
+        </p>
+    </section>
+
+    <section id="section2" class="text-paragraph">
+        <h2 class="paragraph-title" style="color: #e09789;"> Capybara Reproduction and Development</h2>
+        <p class="paragraph-text" style="font-size: 18px;">
+            Species members breed throughout the year, but mating seems to peak just before the rainy season, the
+            time of which varies between regions. <br>
+            <br>
+            Gestation reportedly can last either 149 or 156 days. There is usually only one litter each year, with,
+            typically, four young to a litter, although one subspecies, H. hydrochaeris isthmius, apparently gives
+            birth to an average of five young after a gestation period of 104 to 111 days. <br>
+            <br>
+            Because capybaras have no nests, birth can occur anywhere within their habitat. Newborns weigh about
+            3.3 pounds (1.5 kg). Lactation lasts 16 weeks, although even during this time grass makes up a major
+            portion of the offspring’s diet. Both females and males reach sexual maturity at 15 months of age.
+        </p>
+    </section>
+
+    <section id="section3" class="text-paragraph">
+        <h2 class="paragraph-title" style="color: #e09789;"> What Do Capybara Eat? </h2>
+        <p class="paragraph-text" style="font-size: 18px;">
+            Typically, each family group includes one adult male and one or more females, with their young. Bachelor
+            males often band together in separate groups. Each day the capybara troops must travel long distances in
+            search of food. Yet they nearly always return to the same spot at night.<br>
+            <br>
+            The capybara is active in the morning and evening, wallowing in mudholes and shallow water during the
+            hottest part of the day. In areas where it is frequently bothered by humans, however, the animal has
+            become nocturnal. When closely pursued, H. hydrochaeris enters the water, where it may swim to safety,
+            with only its nostrils, eyes, and ears exposed, or it may hide in floating vegetation, with only its
+            nostrils
+            exposed. The capybara can also swim totally submerged for long distances.<br>
+            <br>
+            Species members are normally found in herds containing 20 individuals, although smaller groupings,
+            comprising only family members, are also seen. A typical group is headed by a dominant male and
+            possesses a hierarchy established and maintained by aggression and fighting. In addition to grasses, the
+            species also feeds on aquatic plants as well as grains, melons, and squashes.
+        </p>
+    </section>
+
+    <section id="section4" class="text-paragraph">
+        <h2 class="paragraph-title" style="color: #e09789;" > Are Capybaras Endangered?</h2>
+        <p class="paragraph-text" style="font-size: 18px;">
+            As a species, capybaras are not endangered, in fact they are classified as “least concern”. However,
+            in some parts, they experienced loss of habitat and the wild population is shrinking. <br>
+            <br>
+            The capybara has also been hunted as an agricultural pest and for its valued meat and fur. In some places,
+            ranchers kill the creature just because it competes with cows and sheep for grass. <br>
+            <br>
+            As a result of overhunting, capybaras have nearly disappeared in parts of their range. Consequently,
+            Venezuelan and Peruvian populations have shrunk, although the animal is still common throughout much
+            of South America.
+        </p>
+    </section>
+
+    <section id="section5" class="text-paragraph">
+        <h2 class="paragraph-title" style="color: #e09789;"> Popularity and meme culture</h2>
+        <p class="paragraph-text" style="font-size: 18px;">
+            In the early 2020s, capybaras became a growing figure of meme culture due to many factors,
+            including the disturbances in Nordelta which led to them
+            being comically postulated as figures of class struggle.
+            Also, a common meme format includes capybaras in various situations with the song "After Party"
+            by Don Toliver, leading to a tremendous growth in popularity.
+            Due to a lyric in Toliver's song, capybaras are also associated with the phrase "Ok I pull
+            up". </p>
+    </section>
+
+    <section id="section6" class="text-paragraph">
+        <h1 style="text-align: center; color: #e09789;">CAPYBARA FAQ</h1>
+        <div class="faq-item">
+            <h2 style="color: #e09789;"> Capybara size: How big is a capybara </h2>
+            <p class="paragraph-text"> The capybara weighs between 59.5 and 174 pounds (27 to 79 kg)
+                and has a combined head-and-body length of 40 to 50 inches (100 to 130 cm),
+                a shoulder height of 20 inches (50 cm), and a vestigial tail.</p>
+        </div>
+        <div class="faq-item">
+            <h2 style="color: #e09789;"> Do capybaras make good pets? </h2>
+            <p class="paragraph-text"> They make great outside pets. Many people want to bring them in the house and
+                try to “potty “train them. These are basically wild animals. They can be brought in if you want your
+                rugs chewed, table legs gnawed, curtains pulled off the windows, and a possible mess in the floor.
+                Outside they swim, run, eat and lounge in the sun during the day. Feeding time is a special time for
+                then and for you. They will stand up and beg for corn, follow you around the yard and my pet would
+                love to get in your lap. They bond with what there are raised with at the time. More times than none
+                it will be you.
+                The bathroom training is an outside pan. Capybaras are semi aquatic animals and require water for
+                daily. Their skin requires water and warmth. The chewing is a natural thing for them. They have
+                teeth at birth and the chewing is done to grind their teeth. If the teeth grow too quickly they will
+                grow into the upper portion of the mouth and prevent their eating.</p>
+        </div>
+        <div class="faq-item">
+            <h2 style="color: #e09789;"> Do capybaras bite? </h2>
+            <p class="paragraph-text"> YES, can bite and will do so. It is their defense for protection. Just
+                keep your fingers away from them and do not try to grab them quickly. They prefer to initiate
+                the affection. Read more about why are capybaras so friendly?</p>
+        </div>
+        <div class="faq-item">
+            <h2 style="color: #e09789;">  Are capybaras aggressive? </h2>
+            <p class="paragraph-text"> ONLY if provoked by another capybara at he feeding pan. They are truly gentle
+                giants.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 style="color: #e09789;" > Do capybaras dig? </h2>
+            <p class="paragraph-text"> NO, they do not dig like hogs. They will go under any possible opening and can
+                squeeze through a small crack. If they get out it is very difficult to chase. They are really fast
+                runners. They can turn on a dime. On occasion I have had one to climb a three foot chain link fence when
+                the dominant male chased him.</p>
+        </div>
+
+        <div class="faq-item">
+            <h2 style="color: #e09789;"> Can capybaras be trained? </h2>
+            <p class="paragraph-text"> THE KEY is patience and repetitive behaviors. They respond to verbal calls,
+                whistles and of course feed buckets. They also respond to their names as they get older. They twirl, run
+                and stand on their hind legs for food. </p>
+        </div>
+
+        <div class="faq-item">
+            <h2 style="color: #e09789;"> How to feed a capybara? </h2>
+            <p class="paragraph-text"> They are GRASS lovers. They love fruits and vegetables. They drink milk replacer,
+                puppy chow, cattle creeper pellets, rabbit pellets, rodent food, and bread. </p>
+        </div>
+
+    </section>
+
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>About Us</h2>
+            <p>This is a page dedicated to capybaras. Here you can learn more about these fascinating creatures.</p>
+            <p class="modal-text">Not for Commercial Use</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        function goToHomePage() {
+        window.location.href = "сайт.html";
+        }
+
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            var topBar = document.querySelector('.top-bar');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                topBar.style.top = '-62px'; // Hide the bar on scroll
+            } else {
+                topBar.style.top = '0'; // Show the bar when scrolled to the top
+            }
+        }
+    </script>
+</body>
+
+</html>

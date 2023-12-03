@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Capy Festival > Callery</title>
+	<link rel="icon" type="image/x-icon" href="capyicon.png">
+	<style>
+		body {
+			background-image: url("capyicon.png");
+			background-size: 95px;
+			background-repeat: repeat;
+			background-color: #f6efe7;
+			margin: 0;
+			padding: 0;
+			font-family: "HanfiyeGuesterya", "Arial", sans-serif;
+			overflow: auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			min-height: 100vh;
+		}
+
+		.decor {
+			content: '';
+			background: rgb(255, 255, 255);
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			width: 72vw;
+			z-index: -1;
+		}
+
+		.decor.right {
+			left: 72vw;
+		}
+
+		.site-title {
+			font-family: "HanfiyeGuesterya";
+			font-size: 36px;
+			color: #3c5556;
+			position: absolute;
+			top: 10px;
+			left: 20px;
+			cursor: url('favicon.png'), pointer;
+		}
+
+		.about-us {
+			font-size: 18px;
+			color: #3c5556;
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			cursor: url('favicon.png'), pointer;
+		}
+
+		.separator {
+			background-color: #3c5556;
+			height: 2px;
+			width: 100%;
+			position: absolute;
+			top: 60px;
+			z-index: 2;
+		}
+
+		.modal-content {
+			background-color: #e9f1ef;
+			border-radius: 15px;
+			margin: 10% auto;
+			padding: 20px;
+			width: 70%;
+			max-width: 400px;
+			position: relative;
+			text-align: center;
+		}
+
+		.navigation {
+			display: flex;
+			justify-content: space-around;
+			margin-top: 0;
+		}
+
+		.nav-item {
+			cursor: url('favicon.png'), pointer;
+			font-size: 16px;
+			color: #3c5556;
+			transition: color 0.3s ease, font-style 0.3s ease;
+		}
+
+		.nav-item:hover {
+			color: #82b74b;
+			font-style: italic;
+		}
+
+		.section {
+			margin: 20px 0;
+			padding: 10px;
+			border-radius: 10px;
+			background-color: #e9f1ef;
+			position: relative;
+			overflow: hidden;
+			transition: height 0.5s ease, margin 0.5s ease, padding 0.5s ease;
+		}
+
+		.section.open {
+			margin: 20px 0 40px 0;
+			padding: 10px;
+		}
+
+		.section-title {
+			font-size: 20px;
+			color: #3c5556;
+			margin-bottom: 10px;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.section-title::before {
+			content: '';
+			width: 20px;
+			height: 5px;
+			background-color: #82b74b;
+			display: inline-block;
+			margin-right: 10px;
+			border-radius: 5px;
+		}
+
+		.section-image {
+			width: 20px;
+			height: 20px;
+			cursor: pointer;
+			transition: transform 0.3s ease;
+		}
+
+		.section:hover .section-image {
+			transform: rotate(180deg);
+		}
+
+		.carousel-container {
+			overflow: hidden;
+			white-space: nowrap;
+			position: relative;
+			max-width: 1045px;
+			margin: auto;
+		}
+
+		.image-carousel {
+			display: flex;
+			transition: transform 0.5s ease;
+			overflow: hidden;
+			width: fit-content;
+			margin: auto;
+		}
+
+		.carousel-item {
+			width: 150px;
+			height: 150px;
+			background-size: cover;
+			border-radius: 10px;
+			margin: 10px;
+			cursor: url('favicon.png'), pointer;
+		}
+
+		#fullImage {
+			max-width: 100%;
+			max-height: 70vh;
+			margin-top: 10px;
+		}
+
+		.circle-container {
+			display: flex;
+			justify-content: center;
+			align-items: flex-start;
+			margin-top: 80px;
+		}
+
+		.circle {
+			width: 100px;
+			height: 100px;
+			background-image: url("gallery/7.jpg");
+			background-size: cover;
+			border-radius: 50%;
+			margin: 0 10px;
+		}
+
+		.gallery-text {
+			font-size: 16px;
+			color: #3c5556;
+			margin-top: 10px;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			z-index: 3;
+		}
+		
+		.modal-content {
+			background-color: #e9f1ef;
+			border-radius: 15px;
+			margin: 5% auto;
+			padding: 20px;
+			width: 80%;
+			max-width: 600px;
+			position: relative;
+			text-align: center;
+		}
+
+		.close {
+			color: #3c5556;
+			font-size: 20px;
+			font-weight: bold;
+			cursor: pointer;
+			position: absolute;
+			top: 10px;
+			right: 10px;
+		}
+
+		.modal-text {
+			font-size: 18px;
+			color: #3c5556;
+			text-align: center;
+		}
+
+		.top-bar {
+			background-color: #c7dbd8;
+			height: 62px;
+			width: 100%;
+			position: fixed;
+			top: 0;
+		}
+
+	</style>
+</head>
+
+<body>
+	<div class="decor"></div>
+	<div class="top-bar"></div>
+	<div class="site-title" onclick="goToHomePage()">Capy Festival</div>
+	<div class="about-us" onclick="openModal()">About Us</div>
+	<div class="separator"></div>
+
+	<div class="circle-container">
+		<div class="circle"></div>
+		<div class="circle"></div>
+		<div class="circle"></div>
+	</div>
+
+	<div class="gallery-text">
+		<p>Explore our capybara gallery presented on this page. These adorable creatures are showcased in various
+			settings and activities.</p>
+	</div>
+
+	<div class="navigation">
+		<ul class="nav-list">
+			<li class="nav-item" onclick="scrollToSection('section1')">Photos</li>
+			<li class="nav-item" onclick="scrollToSection('section2')">Edits</li>
+			<li class="nav-item" onclick="scrollToSection('section3')">Arts</li>
+		</ul>
+	</div>
+
+	<div id="section1" class="section">
+		<div class="section-title" onclick="toggleSection('carousel1')">
+			Photos
+			<img class="section-image" src="watermelon.png">
+		</div>
+			<div class="carousel-container" id="carousel1">
+				<div class="image-carousel">
+				<div class="carousel-item" style="background-image: url('gallery/capyfriendly.jpg')"
+					onclick="openImageModal('gallery/capyfriendly.jpg')"></div>
+				<div class="carousel-item" style="background-image: url('gallery/1.jpg')"
+					onclick="openImageModal('gallery/1.jpg')"></div>
+				<div class="carousel-item" style="background-image: url('gallery/2.jpg')"
+					onclick="openImageModal('gallery/2.jpg')"></div>
+				<div class="carousel-item" style="background-image: url('gallery/3.jpg')"
+					onclick="openImageModal('gallery/3.jpg')"></div>
+				<div class="carousel-item" style="background-image: url('gallery/4.jpg')"
+					onclick="openImageModal('gallery/4.jpg')"></div>
+				<div class="carousel-item" style="background-image: url('gallery/5.jpg')"
+					onclick="openImageModal('gallery/5.jpg')"></div>
+			</div>
+		</div>		 
+
+	<div id="section2" class="section">
+			<div class="section-title" onclick="toggleSection('carousel2')">
+				Edits
+				<img class="section-image" src="watermelon.png">
+			</div>
+			<div class="carousel-container" id="carousel2">
+				<div class="image-carousel">
+					<div class="carousel-item" style="background-image: url('capyslay.jpg')"
+						onclick="openImageModal('capyslay.jpg')"></div>
+					<div class="carousel-item" style="background-image: url('gallery/21.jpg')"
+						onclick="openImageModal('gallery/21.jpg')"></div>
+						<div class="carousel-item" style="background-image: url('gallery/22.jpg')"
+						onclick="openImageModal('gallery/22.jpg')"></div>
+						<div class="carousel-item" style="background-image: url('gallery/23.jpg')"
+						onclick="openImageModal('gallery/23.jpg')"></div>
+						<div class="carousel-item" style="background-image: url('gallery/24.jpg')"
+						onclick="openImageModal('gallery/24.jpg')"></div>
+						<div class="carousel-item" style="background-image: url('gallery/25.jpg')"
+						onclick="openImageModal('gallery/25.jpg')"></div>
+				</div>
+			</div>
+		</div>
+
+	<div id="section3" class="section">
+				<div class="section-title" onclick="toggleSection('carousel3')">
+					Meme
+					<img class="section-image" src="watermelon.png">
+				</div>
+				<div class="carousel-container" id="carousel3">
+					<div class="image-carousel">
+						<div class="carousel-item" style="background-image: url('gallery/meme1.jpg')"
+							onclick="openImageModal('gallery/meme1.jpg')">
+						</div>
+						<div class="carousel-item" style="background-image: url('gallery/meme2.jpg')"
+							onclick="openImageModal('gallery/meme2.jpg')">
+						</div>
+						<div class="carousel-item" style="background-image: url('gallery/meme10.jpg')"
+						onclick="openImageModal('gallery/meme10.jpg')">
+					</div>
+					<div class="carousel-item" style="background-image: url('gallery/meme3.jpg')"
+						onclick="openImageModal('gallery/meme3.jpg')">
+					</div>
+					<div class="carousel-item" style="background-image: url('gallery/meme4.jpg')"
+					onclick="openImageModal('gallery/meme4.jpg')">
+				</div>
+				<div class="carousel-item" style="background-image: url('gallery/meme5.jpg')"
+				onclick="openImageModal('gallery/meme5.jpg')">
+			</div>
+	
+					</div>
+				</div>
+		</div>
+
+	<div class="modal" id="imageModal">
+					<div class="modal-content">
+						<span class="close" onclick="closeImageModal()">&times;</span>
+						<img src="" alt="Full Image" id="fullImage">
+					</div>
+		</div>
+
+	<div class="modal" id="myModal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal()">&times;</span>
+			<h2>About Us</h2>
+			<p>This is a page dedicated to capybaras. Here you can learn more about these fascinating creatures.</p>
+			<p class="modal-text">Not for Commercial Use</p>
+			</div>
+	</div>
+
+<script>
+	function openModal() {
+		var modal = document.getElementById("myModal");
+			modal.style.display = "block";
+	}
+
+	function closeModal() {
+		var modal = document.getElementById("myModal");
+			modal.style.display = "none";
+	}
+
+	function goToHomePage() {
+			window.location.href = "сайт.html";
+	}
+
+			window.onscroll = function () {
+				scrollFunction()
+	};
+
+	function scrollFunction() {
+		var topBar = document.querySelector('.top-bar');
+			if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+				topBar.style.top = '-62px';
+			} else {
+				topBar.style.top = '0';
+			}
+	}
+
+	function scrollToSection(sectionId) {
+		var section = document.getElementById(sectionId);
+			section.scrollIntoView({ behavior: "smooth" });
+	}
+
+	function openImageModal(imageSrc) {
+		var modal = document.getElementById("imageModal");
+		var fullImage = document.getElementById("fullImage");
+			fullImage.src = imageSrc;
+			modal.style.display = "block";
+	}
+
+	function closeImageModal() {
+		var modal = document.getElementById("imageModal");
+			modal.style.display = "none";
+	}
+
+	function toggleSection(carouselId) {
+		var carousel = document.getElementById(carouselId);
+		var arrows = carousel.getElementsByClassName('arrow');
+			if (carousel.classList.contains('open')) {
+				carousel.classList.remove('open');
+			for (var i = 0; i < arrows.length; i++) {
+				arrows[i].style.opacity = '0';
+			}
+				carousel.style.height = '0';
+			} else {
+				carousel.classList.add('open');
+			for (var i = 0; i < arrows.length; i++) {
+				arrows[i].style.opacity = '1';
+			}
+				carousel.style.height = 'auto';
+			}
+	}
+
+</script>
+
+</body>
+
+</html>

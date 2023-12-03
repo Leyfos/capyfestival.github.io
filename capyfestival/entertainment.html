@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Capy Festival > Other</title>
+    <link rel="icon" type="image/x-icon" href="capyicon.png">
+    <style>
+        body {
+            background-image: url("capyicon.png");
+            background-size: 95px;
+            background-repeat: repeat;
+            background-color: #F7F5EB;
+            margin: 0;
+            padding: 0;
+            font-family: "HanfiyeGuesterya", "Arial", sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .decor {
+            content: '';
+            background: rgb(255, 255, 255);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            width: 72vw;
+            z-index: -1;
+        }
+
+        .decor.right {
+            left: 72vw;
+        }
+
+        .site-title {
+            font-family: "HanfiyeGuesterya";
+            font-size: 36px;
+            color: #3c5556;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            cursor: url('favicon.png'), pointer;
+        }
+
+        .about-us {
+            font-size: 18px;
+            color: #3c5556;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: url('favicon.png'), pointer;
+        }
+
+        .separator {
+            background-color: #3c5556;
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            top: 60px;
+            z-index: 2;
+        }
+
+        .content-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #e9f1ef;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-block img {
+            max-width: 50%; /* Уменьшенная максимальная ширина */
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .content-text {
+            font-size: 18px;
+            color: #3c5556;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .menu-bar {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .menu-item {
+            font-size: 16px;
+            color: #3c5556;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+            color: #3c5556;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 3;
+        }
+
+        .modal-content {
+            background-color: #e9f1ef;
+            border-radius: 15px;
+            margin: 10% auto;
+            padding: 20px;
+            width: 70%;
+            max-width: 400px;
+            position: relative;
+            text-align: center;
+        }
+
+        .close {
+            color: #3c5556;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .modal-text {
+            font-size: 18px;
+            color: #3c5556;
+            text-align: center;
+        }
+
+        .top-bar {
+            background-color: #c7dbd8;
+            height: 62px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="decor"></div>
+    <div class="top-bar"></div>
+    <div class="site-title" onclick="goToHomePage()">Capy Festival</div>
+    <div class="about-us" onclick="openModal()">About Us</div>
+    <div class="separator"></div>
+
+    <!-- Добавленный блок с изображением и текстом -->
+    <div class="content-block">
+        <img src="gallery/9.jpg" alt="Capybara Image">
+        <div class="content-text">
+            <p>Добро пожаловать в удивительный мир капибар! На данной странице нашего сайта вы откроете для себя
+                бескрайнее
+                многообразие контента, посвященного этим удивительным созданиям. Мы расскажем вам о зоопарках и
+                заповедниках,
+                где вы можете встретить капибар вживую.Не упустите возможность погрузиться в этот удивительный мир, где капибары
+                становятся
+                настоящими звездами, а зоопарки и заповедники создают уникальные условия для сохранения этого чудесного
+                вида. Давайте вместе исследовать, учиться и вдохновляться вместе с капибарами!</p>
+        </div>
+    </div>
+
+    <div class="menu-bar">
+        <div class="menu-item dropdown">
+            TikTok
+            <div class="dropdown-content">
+            </div>
+        </div>
+
+        <div class="menu-item dropdown">
+            YouTube
+            <div class="dropdown-content">
+            </div>
+        </div>
+
+        <div class="menu-item dropdown">
+            Заповедники
+            <div class="dropdown-content">
+            </div>
+        </div>
+
+        <div class="menu-item dropdown">
+            Зоопарки
+            <div class="dropdown-content">
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>About Us</h2>
+            <p>This is a page dedicated to capybaras. Here you can learn more about these fascinating creatures.</p>
+            <p class="modal-text">Not for Commercial Use</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        function goToHomePage() {
+            window.location.href = "сайт.html";
+        }
+    </script>
+
+    <script>
+        window.onscroll = function () { scrollFunction() };
+
+        function scrollFunction() {
+            var topBar = document.querySelector('.top-bar');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                topBar.style.top = '-62px'; // Прячем полоску при прокрутке
+            } else {
+                topBar.style.top = '0'; // Показываем полоску при возвращении вверх
+            }
+        }
+    </script>
+
+</body>
+
+</html>
